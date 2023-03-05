@@ -17,21 +17,25 @@ const Navbar = () => {
       {!isActive ? (
         <div className="flex justify-items-start ">
           <div className="bg-primary overflow-hidden h-16  w-full">
-            <button className="cursor-auto">
+            <button  
+            onClick={handleClick} 
+            className="cursor-pointer w-48 ml-32 h-14 mt-3  rounded-tl-lg rounded-tr-lg  bg-white ">
               <img
-                className="w-48 h-12 ml-32 my-2  rounded-tl-lg rounded-tr-lg  cursor-pointer"
-                src="https://images.migrosone.com/sanalmarket/custom/sanalmarket-seo-34706362.png"
+                className="w-36  h-10 my-2  ml-6   cursor-pointer"
+                src="https://www.migros.com.tr/assets/logos/sanalmarket/sanalmarket-logo.svg"
                 alt=""
-                onClick={handleClick}
+                
               ></img>
             </button>
 
-            <button className="cursor-auto">
+            <button  
+            onClick={handleClick2} 
+            className="bg-white w-32 pb-4 h-12 ml-2 mt-3 rounded-lg   cursor-pointer">
               <img
-                className="w-32 h-12 my-3 ml-2 rounded-lg   cursor-pointer"
-                src="https://kuponigo.com/tr/wp-content/uploads/2022/10/migros-hemen-logo-480x270.jpg"
+                className="w-28 h-10 my-2 ml-2 rounded-lg   cursor-pointer"
+                src="https://www.migros.com.tr/assets/logos/hemen/hemen-logo.svg"
                 alt=""
-                onClick={handleClick2}
+               
               ></img>
             </button>
           </div>
@@ -39,21 +43,25 @@ const Navbar = () => {
       ) : (
         <div className="flex justify-start ">
           <div className="bg-hemen overflow-hidden h-16  w-full">
-            <button  className="cursor-auto">
+            <button 
+            onClick={handleClick} 
+            className="cursor-pointer w-48 ml-32 h-12 mt-3  rounded-lg bg-white">
               <img
-                className="w-48 h-12 ml-32 my-3 rounded-lg    cursor-pointer"
-                src="https://images.migrosone.com/sanalmarket/custom/sanalmarket-seo-34706362.png"
+                className="w-36  h-10 my-2  ml-6   cursor-pointer"
+                src="https://www.migros.com.tr/assets/logos/sanalmarket/sanalmarket-logo.svg"
                 alt=""
-                onClick={handleClick}
+                
               ></img>
             </button>
 
-            <button className="cursor-auto">
+            <button 
+             onClick={handleClick2}
+             className="bg-white w-32  h-13 mt-3 ml-2 rounded-tl-lg rounded-tr-lg cursor-pointer">
               <img
-                className="w-32 h-12 my-2  ml-2  rounded-tl-lg rounded-tr-lg  cursor-pointer"
-                src="https://kuponigo.com/tr/wp-content/uploads/2022/10/migros-hemen-logo-480x270.jpg"
+                className="w-28  h-10 my-2  ml-2  cursor-pointer"
+                src="https://www.migros.com.tr/assets/logos/hemen/hemen-logo.svg"
                 alt=""
-                onClick={handleClick2}
+                
               ></img>
             </button>
           </div>
