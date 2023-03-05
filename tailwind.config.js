@@ -10,9 +10,9 @@ module.exports = {
 
       tooltipArrows: (theme) => ({
         "danger-arrow": {
-          borderColor: theme("colors.red.400"),
+          borderColor: theme("colors.gray.300"),
           borderWidth: 1,
-          backgroundColor: theme("colors.red.200"),
+          backgroundColor: theme("colors.white"),
           size: 10,
           offset: 10,
         },
