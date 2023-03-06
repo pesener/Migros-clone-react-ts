@@ -30,9 +30,9 @@ const Navbar = () => {
 
             <button  
             onClick={handleClick2} 
-            className="bg-white w-32 pb-4 h-12 ml-2 mt-2 rounded-lg   cursor-pointer">
+            className="bg-white w-32 pb-4 h-12 ml-2 mt-2  rounded-lg   cursor-pointer">
               <img
-                className="w-9/12 h-10 my-2 ml-4  rounded-lg   cursor-pointer"
+                className="w-9/12 h-10 my-2 ml-4     cursor-pointer"
                 src="https://www.migros.com.tr/assets/logos/hemen/hemen-logo.svg"
                 alt=""
                
