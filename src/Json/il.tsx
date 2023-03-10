@@ -1,4 +1,4 @@
- export const  CityNames: any = [
+ export var  CityNames: any = [
   "İSTANBUL",
   "ANKARA",
   "İZMİR",
