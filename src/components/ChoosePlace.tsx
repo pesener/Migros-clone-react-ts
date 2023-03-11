@@ -1,7 +1,6 @@
-import React, { useState, useEffect } from "react";
-import { CityNames } from "../Json/il";
+import React, { useState } from "react";
+import { Cities } from "../Json/il";
 import { Districts } from "../Json/ilce";
-import { Neighbourhoods } from "../Json/mahalle";
 import { BiChevronDown } from "react-icons/bi";
 import { SlMagnifier } from "react-icons/sl";
 type Props = {
@@ -25,15 +24,17 @@ const ChoosePlace = ({ isOn, setIsOn, setIsActive, isActive }: Props) => {
 
   const [open, setOpen] = useState<boolean>(false);
 
-  const cityNa = CityNames;
+  const cityNa = Cities;
 
-  const cityN = selectedCity
+ 
+
+
   ///dist///
 
   const distNa = Districts;
 
-
-
+ 
+   const [districts, setDistricts] = useState<any>();
 
   const [dist, setDist] = useState<string>();
 
@@ -42,16 +43,16 @@ const ChoosePlace = ({ isOn, setIsOn, setIsActive, isActive }: Props) => {
 
   const [openDist, setOpenDist] = useState<boolean>(false);
 
-   
+  const handleCity = async (id:string)=> { 
+    const dt:any = distNa.filter(x => x.il_id === id)
+    await setDistricts(dt)
+    console.log(dt) 
+   }
 
-  /// Neig///
 
-  const [selectedNeig, setSelectedNeig] = useState<string>();
 
-  const [openNeig, setOpenNeig] = useState<boolean>(false);
 
-  const neigNa = Neighbourhoods;
-  console.log(cityN)
+ 
   return (
     <div>
       <div className="fixed inset-0  flex justify-center items-center ">
@@ -104,32 +105,33 @@ const ChoosePlace = ({ isOn, setIsOn, setIsActive, isActive }: Props) => {
               <div className="flex justify-center items-center  px-2 sticky top-0 bg-white">
                 <SlMagnifier
                   size={27}
-                  className="text-gray-400 bg-white border-l-2 border-t-2 border-b-2  rounded-l-lg"
+                  className="text-gray-400 bg-white  rounded-l-lg"
                 />
                 <input
-                  className="border-t-2 border-b-2 border-r-2 border-1 bg-white  shadow-lg w-96 rounded-r-lg outline-none "
+                  className=" bg-white border-b-2  w-96 outline-none "
                   type="text"
                   value={city}
-                  onChange={(e) => setCity(e.target.value.toLowerCase())}
+                  onChange={(e) => {handleCity(e.target.value);setCity(e.target.value)}}
+             
                 ></input>
               </div>
 
-              {cityNa.map((cit: any) => (
-                <li
-                  className={`p-2  text-sm cursor-pointer hover:text-orange-400 active:bg-gray-200 ${cit.toLowerCase()}
+              {cityNa?.map((cit: any) => (
+                <li value={cit.id}
+                  className={`p-2  text-sm cursor-pointer hover:text-orange-400 active:bg-gray-200 ${cit.name}
                   ${
-                    cit.toLowerCase() === selectedCity?.toLowerCase() &&
+                    cit.name === selectedCity &&
                     "text-orange-400"
-                  } ${cit.toLowerCase().startsWith(city) ? "block" : "hidden"}`}
-                  key={cit.index}
+                  } ${cit.name.startsWith(city) ? "block" : "hidden"}`}
+                  key={cit.name}
                   onClick={() => {
-                    if (cit.toLowerCase() !== selectedCity?.toLowerCase()) {
-                      setSelectedCity(cit);
+                    if (cit.name !== selectedCity) {
+                      setSelectedCity(cit.name);
                     }
                  
                   }}
                 >
-                  {cit}
+                  {cit.name}
                   
                 </li>
               ))}
@@ -153,38 +155,42 @@ const ChoosePlace = ({ isOn, setIsOn, setIsActive, isActive }: Props) => {
               <div className="flex justify-center items-center  px-2 sticky top-0 bg-white">
                 <SlMagnifier
                   size={27}
-                  className="text-gray-400 bg-white border-l-2 border-t-2 border-b-2  rounded-l-lg"
+                  className="text-gray-400 bg-white  rounded-l-lg"
                 />
                 <input
-                  className="border-t-2 border-b-2 border-r-2 border-2 bg-white  shadow-lg w-96 rounded-r-lg outline-none "
+                  className=" bg-white  border-b-2 w-96 outline-none "
                   type="text"
                   value={dist}
                   onChange={(e) => setDist(e.target.value)}
                 ></input>
               </div>
 
-              {   distNa.map((dis: any) => (
+              {
+              districts && 
+              districts?.map((dis: any) => (
                 <li
                 
-                  className={`p-2  text-sm cursor-pointer hover:text-orange-400 active:bg-gray-200 ${dis}
+                  className={`p-2  text-sm cursor-pointer hover:text-orange-400 active:bg-gray-200 ${dis.name}
                   ${
-                    dis === selectedDist &&
+                    dis.name === selectedDist &&
                     "text-orange-400"
                   } `}
-                  key={dis.Districts}
+                  key={dis.name}
                   onClick={() => {
-                    if (dis !== selectedDist) {
-                      setSelectedDist(dis);
+                    if (dis.name !== selectedDist) {
+                      setSelectedDist(dis.name);
                     }
                    
                   }}
                 >
                   
-                {dis.Districts}
+                {dis.name}
                 </li>
               )) }
             </ul>
           </div>
+
+        
         </div>
       </div>
     </div>
