@@ -3,6 +3,7 @@ import { Cities } from "../Json/il";
 import { Districts } from "../Json/ilce";
 import { BiChevronDown } from "react-icons/bi";
 import { SlMagnifier } from "react-icons/sl";
+
 type Props = {
   isOn: boolean;
   setIsOn: (active: boolean) => void;
@@ -10,11 +11,13 @@ type Props = {
   setIsActive: (active: boolean) => void;
 };
 
+
 const ChoosePlace = ({ isOn, setIsOn, setIsActive, isActive }: Props) => {
   const handleClick = () => {
     setIsActive(false);
     console.log(isActive);
   };
+
 
   ///city///
 
@@ -26,50 +29,41 @@ const ChoosePlace = ({ isOn, setIsOn, setIsActive, isActive }: Props) => {
 
   const cityNa = Cities;
 
- 
-
-
   ///dist///
 
   const distNa = Districts;
 
- 
-   const [districts, setDistricts] = useState<any>();
+  const [districts, setDistricts] = useState<any>();
 
   const [dist, setDist] = useState<string>();
 
- 
   const [selectedDist, setSelectedDist] = useState<string>();
 
   const [openDist, setOpenDist] = useState<boolean>(false);
 
-  const handleCity = async (id:string)=> { 
-    const dt:any = distNa.filter(x => x.il_id === id)
-    await setDistricts(dt)
-    console.log(dt) 
-   }
+  const handleCity = async (id: any) => {
+    const dt: any = distNa.filter((x) => x.il_id === id);
+    await setDistricts(dt);
+    console.log(dt);
+  };
 
-
-
-
- 
   return (
     <div>
-      <div className="fixed inset-0  flex justify-center items-center ">
-        <div className="w-[600px] h-[600px] mt-0 align-top bg-white rounded p-8 flex flex-col justify-center items-center">
-          <div className="bg-white mb-8 w-full p-0 font-bold justify-between mt-0  flex ">
-            <div className="flex flex-col justify-between align-top self-start">
-              <h1 className="text-2xl ml-16 font-bold w-96 justify-center flex items-center text-center">
+      <div className="fixed  z-4 inset-0  flex justify-center items-center ">
+        <div className="w-[600px] h-[550px]   bg-white rounded  flex flex-col justify-center items-center">
+          <div className="bg-white mb-8 w-full font-bold justify-between  flex ">
+            <div className="flex flex-col items-center  justify-between ">
+              <h1 className="text-2xl ml-24 p-1 font-bold w-96 justify-center flex items-center text-center ">
                 Adresime Gelsin
               </h1>
-              <h1 className="text-xl mt-0 ml-16 justify-center text-center font-bold ">
+              <h1 className="text-xl ml-24 justify-center text-center font-bold ">
                 Siparişini nereye getirelim?
               </h1>
             </div>
-            <div className="mt-0 mb-4">
+            <div className=" mb-4">
               <span
                 onClick={handleClick}
-                className="w-16 ml-12  h-16 place-self-end rounded-full justify-center  items-center flex hover:bg-gray-100 cursor-pointer"
+                className="w-16 ml-8  h-16 place-self-end rounded-full justify-center  items-center flex hover:bg-gray-100 cursor-pointer"
               >
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
@@ -88,68 +82,76 @@ const ChoosePlace = ({ isOn, setIsOn, setIsActive, isActive }: Props) => {
               </span>
             </div>
           </div>
-         
-          <div className="flex-col flex justify-center items-center  ">
+
+          <div className="flex-col flex justify-center items-center py-3.5 ">
             <div
               onClick={() => setOpen(!open)}
-              className="bg-white  w-96   p-1 rounded-lg mb-4 border-2 flex justify-between items-center shadow-lg font-bold cursor-pointer"
+              className={`bg-white  w-96   p-1 rounded mb-4  h-[56px] ${
+                open ? " border-2 " : "border"
+             } border-black flex justify-between items-center shadow-lg font-bold cursor-pointer`}
             >
-              {selectedCity ? selectedCity : "il"}
+              {selectedCity ?  selectedCity : "il"}
+            
               <BiChevronDown size={30} />
             </div>
+
             <ul
-              className={`bg-white  overflow-y-auto w-96 active:border-2 rounded-lg ${
-                open ? "max-h-60 border-2" : "max-h-0"
+              className={`bg-white  overflow-y-auto w-96 active:border-2 shadow-lg rounded-lg ${
+                 open ? "max-h-60 border-2 " : "max-h-0"
               }`}
             >
-              <div className="flex justify-center items-center  px-2 sticky top-0 bg-white">
+              <div className="flex justify-center items-center   h-8 sticky  bg-white">
                 <SlMagnifier
                   size={27}
                   className="text-gray-400 bg-white  rounded-l-lg"
                 />
                 <input
-                  className=" bg-white border-b-2  w-96 outline-none "
+                  className=" bg-white border-b  w-96  "
                   type="text"
                   value={city}
-                  onChange={(e) => {handleCity(e.target.value);setCity(e.target.value)}}
-             
+                  onChange={(e) => setCity(e.target.value?.toLowerCase())}
                 ></input>
               </div>
 
               {cityNa?.map((cit: any) => (
-                <li value={cit.id}
-                  className={`p-2  text-sm cursor-pointer hover:text-orange-400 active:bg-gray-200 ${cit.name}
-                  ${
-                    cit.name === selectedCity &&
-                    "text-orange-400"
-                  } ${cit.name.startsWith(city) ? "block" : "hidden"}`}
+                <option
+                  value={cit.id}
+                  className={`p-2  text-sm cursor-pointer  hover:text-orange-400 active:bg-gray-200 ${
+                    cit.name 
+                  }
+                  ${cit.name === selectedCity && "text-orange-400"} ${
+                    cit.name?.toLowerCase().startsWith(city) ? "block" : "hidden"
+                  }`}
                   key={cit.name}
-                  onClick={() => {
-                    if (cit.name !== selectedCity) {
+                  onClick={(e: any) => {
+                    if (cit.name?.toLowerCase() !== selectedCity?.toLowerCase()) {
                       setSelectedCity(cit.name);
+                      handleCity(e.target.value);
+                      setOpen(!open)
                     }
-                 
                   }}
                 >
                   {cit.name}
-                  
-                </li>
+                </option>
               ))}
             </ul>
           </div>
 
-
-           <div className="flex-col flex justify-center items-center  ">
-           <div 
+          <div className={`flex-col flex  justify-center items-center py-3.5 mb-32 ${
+                 open ? "hidden" : ""
+              } `}>
+            <div
               onClick={() => setOpenDist(!openDist)}
-              className="bg-white  w-96   p-1 rounded-lg mb-4 border-2 flex justify-between items-center shadow-lg font-bold cursor-pointer"
+              className={`bg-white  w-96    p-1 rounded h-[56px] mb-4 ${
+                openDist ? " border-2  " : " border"
+             } border-black flex justify-between items-center shadow-lg font-bold cursor-pointer`}
             >
               {selectedDist ? selectedDist : "ilçe"}
               <BiChevronDown size={30} />
             </div>
             <ul
-              className={`bg-white  overflow-y-auto w-96 active:border-2 rounded-lg ${
-                openDist ? "max-h-60 border-2" : "max-h-0"
+              className={`bg-white  overflow-y-auto w-96 shadow-lg  rounded-lg ${
+                openDist ? "max-h-60 border-2  " : "max-h-0" 
               }`}
             >
               <div className="flex justify-center items-center  px-2 sticky top-0 bg-white">
@@ -158,39 +160,34 @@ const ChoosePlace = ({ isOn, setIsOn, setIsActive, isActive }: Props) => {
                   className="text-gray-400 bg-white  rounded-l-lg"
                 />
                 <input
-                  className=" bg-white  border-b-2 w-96 outline-none "
+                  className=" bg-white  border-b w-96  "
                   type="text"
                   value={dist}
                   onChange={(e) => setDist(e.target.value)}
                 ></input>
               </div>
 
-              {
-              districts && 
-              districts?.map((dis: any) => (
-                <li
-                
-                  className={`p-2  text-sm cursor-pointer hover:text-orange-400 active:bg-gray-200 ${dis.name}
-                  ${
-                    dis.name === selectedDist &&
-                    "text-orange-400"
-                  } `}
-                  key={dis.name}
-                  onClick={() => {
-                    if (dis.name !== selectedDist) {
-                      setSelectedDist(dis.name);
+              {districts &&
+                districts?.map((dis: any) => (
+                  <li
+                    className={`p-2  text-sm cursor-pointer hover:text-orange-400 active:bg-gray-200 ${
+                      dis.name
                     }
-                   
-                  }}
-                >
-                  
-                {dis.name}
-                </li>
-              )) }
+                  ${dis.name === selectedDist && "text-orange-400"} `}
+                    key={dis.name}
+                    onClick={() => {
+                      if (dis.name !== selectedDist) {
+                        setSelectedDist(dis.name);
+                        setOpenDist(!openDist)
+                      }
+                    }}
+                  >
+                    {dis.name}
+                  </li>
+                ))}
             </ul>
           </div>
-
-        
+          
         </div>
       </div>
     </div>

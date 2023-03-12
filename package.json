@@ -12,6 +12,8 @@
     "react-icons": "^4.8.0",
     "react-scripts": "5.0.1",
     "turkey-neighbourhoods": "^3.0.0",
+    "turkey-yl-district": "^1.1.0",
+    "use-turkey-cities": "^0.1.1",
     "web-vitals": "^2.1.4"
   },
   "scripts": {
