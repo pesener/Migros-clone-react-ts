@@ -4,6 +4,8 @@ import AdresModal from "./AdresModal";
 const Adres = () => {
 
   const [isActive, setIsActive] = useState<boolean>(false);
+  const [selectedCity, setSelectedCity] = useState<any>();
+  const [selectedDist, setSelectedDist] = useState<any>();
 
   const handleClick = () => {
     setIsActive(true);
@@ -26,7 +28,7 @@ const Adres = () => {
         ></img>
 
         <div className="text-sm mt-4 font-bold   m-2">
-          Teslimat adresi seçiniz
+        {selectedCity ? <h1>{selectedCity},{selectedDist}</h1>    : "Teslimat adresini seçiniz"}
         </div>
 
         <div>
@@ -51,7 +53,9 @@ const Adres = () => {
           src="https://www.migros.com.tr/assets/icons/header-delivery-schedule-separator.svg"
           alt=""
         ></img>
-      </div>{ isActive ?  <AdresModal  setIsActive={setIsActive} isActive={isActive}/>  :  ""}
+      </div>{ isActive ?  <AdresModal  selectedCity={selectedCity} setSelectedCity={setSelectedCity} 
+      selectedDist={selectedDist} setSelectedDist ={setSelectedDist}
+  setIsActive={setIsActive} isActive={isActive}/>  :  ""}
 
       <div className="w-60 flex h-14 mt-4   ml-0 border-t-2 border-r-2 border-b-2  rounded-tr-lg rounded-br-lg  cursor-pointer">
         <div className="text-sm mt-2 ml-1 w-42 font-normal ">

@@ -4,9 +4,13 @@ import ChoosePlace from "./ChoosePlace";
 type Props = {
   isActive: boolean;
   setIsActive: (active: boolean) => void;
+  selectedDist:string;
+  setSelectedDist:(active: string) =>void;
+  selectedCity:string;
+  setSelectedCity: (active:string) => void;
 };
 
-const AdresModal = ({ isActive, setIsActive }: Props) => {
+const AdresModal = ({ isActive, setIsActive,selectedCity, setSelectedCity,selectedDist, setSelectedDist  }: Props) => {
   const [isOn, setIsOn] = useState<boolean>(false);
 
   const handleClick = () => {
@@ -109,6 +113,7 @@ const AdresModal = ({ isActive, setIsActive }: Props) => {
           isOn={isOn}
           setIsActive={setIsActive}
           isActive={isActive}
+          selectedCity={selectedCity} setSelectedCity={setSelectedCity}selectedDist={selectedDist} setSelectedDist ={setSelectedDist}
         />
       )}
     </div>

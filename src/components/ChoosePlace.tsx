@@ -9,10 +9,14 @@ type Props = {
   setIsOn: (active: boolean) => void;
   isActive: boolean;
   setIsActive: (active: boolean) => void;
+  selectedDist:string
+  setSelectedDist:(active: string) =>void
+  selectedCity:string
+  setSelectedCity: (active:string) => void
 };
 
 
-const ChoosePlace = ({ isOn, setIsOn, setIsActive, isActive }: Props) => {
+const ChoosePlace = ({ isOn, setIsOn, setIsActive, isActive,selectedCity, setSelectedCity,selectedDist, setSelectedDist }: Props) => {
   const handleClick = () => {
     setIsActive(false);
     console.log(isActive);
@@ -23,7 +27,6 @@ const ChoosePlace = ({ isOn, setIsOn, setIsActive, isActive }: Props) => {
 
   const [city, setCity] = useState<string>();
 
-  const [selectedCity, setSelectedCity] = useState<string>();
 
   const [open, setOpen] = useState<boolean>(false);
 
@@ -37,7 +40,6 @@ const ChoosePlace = ({ isOn, setIsOn, setIsActive, isActive }: Props) => {
 
   const [dist, setDist] = useState<string>();
 
-  const [selectedDist, setSelectedDist] = useState<string>();
 
   const [openDist, setOpenDist] = useState<boolean>(false);
 
@@ -92,7 +94,7 @@ const ChoosePlace = ({ isOn, setIsOn, setIsActive, isActive }: Props) => {
             >
               {selectedCity ?  selectedCity : "il"}
             
-              <BiChevronDown size={30} />
+              <BiChevronDown size={38}  className="text-gray-400" />
             </div>
 
             <ul
@@ -114,6 +116,7 @@ const ChoosePlace = ({ isOn, setIsOn, setIsActive, isActive }: Props) => {
               </div>
 
               {cityNa?.map((cit: any) => (
+               
                 <option
                   value={cit.id}
                   className={`p-2  text-sm cursor-pointer  hover:text-orange-400 active:bg-gray-200 ${
@@ -131,6 +134,7 @@ const ChoosePlace = ({ isOn, setIsOn, setIsActive, isActive }: Props) => {
                     }
                   }}
                 >
+                  
                   {cit.name}
                 </option>
               ))}
@@ -147,7 +151,7 @@ const ChoosePlace = ({ isOn, setIsOn, setIsActive, isActive }: Props) => {
              } border-black flex justify-between items-center shadow-lg font-bold cursor-pointer`}
             >
               {selectedDist ? selectedDist : "ilçe"}
-              <BiChevronDown size={30} />
+              <BiChevronDown size={38}  className="text-gray-400"/>
             </div>
             <ul
               className={`bg-white  overflow-y-auto w-96 shadow-lg  rounded-lg ${
@@ -169,7 +173,7 @@ const ChoosePlace = ({ isOn, setIsOn, setIsActive, isActive }: Props) => {
 
               {districts &&
                 districts?.map((dis: any) => (
-                  <li
+                  <option
                     className={`p-2  text-sm cursor-pointer hover:text-orange-400 active:bg-gray-200 ${
                       dis.name
                     }
@@ -183,7 +187,7 @@ const ChoosePlace = ({ isOn, setIsOn, setIsActive, isActive }: Props) => {
                     }}
                   >
                     {dis.name}
-                  </li>
+                  </option>
                 ))}
             </ul>
           </div>
