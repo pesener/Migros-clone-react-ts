@@ -3,6 +3,7 @@ import { Cities } from "../Json/il";
 import { Districts } from "../Json/ilce";
 import { BiChevronDown } from "react-icons/bi";
 import { SlMagnifier } from "react-icons/sl";
+import getCities from 'turkey-neighbourhoods'
 
 type Props = {
   isOn: boolean;
@@ -31,6 +32,8 @@ const ChoosePlace = ({ isOn, setIsOn, setIsActive, isActive,selectedCity, setSel
   const [open, setOpen] = useState<boolean>(false);
 
   const cityNa = Cities;
+
+
 
   ///dist///
 
@@ -115,29 +118,29 @@ const ChoosePlace = ({ isOn, setIsOn, setIsActive, isActive,selectedCity, setSel
                 ></input>
               </div>
 
-              {cityNa?.map((cit: any) => (
+               {cityNa?.map((cit: any) => ( 
                
                 <option
-                  value={cit.id}
-                  className={`p-2  text-sm cursor-pointer  hover:text-orange-400 active:bg-gray-200 ${
-                    cit.name 
-                  }
-                  ${cit.name === selectedCity && "text-orange-400"} ${
-                    cit.name?.toLowerCase().startsWith(city) ? "block" : "hidden"
-                  }`}
-                  key={cit.name}
-                  onClick={(e: any) => {
-                    if (cit.name?.toLowerCase() !== selectedCity?.toLowerCase()) {
-                      setSelectedCity(cit.name);
-                      handleCity(e.target.value);
-                      setOpen(!open)
-                    }
-                  }}
+                   value={cit.id}
+                className={`p-2  text-sm cursor-pointer  hover:text-orange-400 active:bg-gray-200 ${
+                  cit.name 
+                }
+                ${cit.name === selectedCity && "text-orange-400"} ${
+                  cit.name?.toLowerCase().startsWith(city) ? "block" : "hidden"
+                }`}
+               key={cit.name}
+                onClick={(e: any) => {
+                  if (cit.name?.toLowerCase() !== selectedCity?.toLowerCase()) {
+                    setSelectedCity(cit.name);
+                    handleCity(e.target.value);
+                    setOpen(!open)
+                   }
+                }}
                 >
                   
                   {cit.name}
                 </option>
-              ))}
+               ))}  
             </ul>
           </div>
 
